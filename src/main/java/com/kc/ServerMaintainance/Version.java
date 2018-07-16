@@ -1,6 +1,7 @@
 package com.kc.ServerMaintainance;
 
 public class Version {
+	String name;
 	int major;
 	int minor;
 	int patch;
@@ -14,6 +15,14 @@ public class Version {
 		this.major = major;
 		this.minor = minor;
 		this.patch = patch;
+	}
+	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public int getMajor() {
 		return major;
