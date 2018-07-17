@@ -23,7 +23,7 @@ public class ServerMaintainanceServices {
 		SoftwareType st=new SoftwareType();
 		Map<String,Software> softwares=new HashMap();
 		Software sw=new Software();
-	
+		Version v=new Version();
 		Map<String,Version> versions=new HashMap();	
 		try {
 			scan = new Scanner(file);
@@ -35,7 +35,7 @@ public class ServerMaintainanceServices {
 				String serverName=lineArray[0].trim();
 				sd.setName(serverName); 				
 				
-				Version v=new Version();
+				
 				String[] ver=lineArray[3].split("\\.");
 				String versionName=lineArray[3].trim();
 				v.setName(versionName);

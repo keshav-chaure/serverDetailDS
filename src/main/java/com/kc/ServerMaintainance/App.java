@@ -22,7 +22,7 @@ public class App
         ServerMaintainanceServices s= new ServerMaintainanceServices();
     	Set<ServerDetail> serverDetailsSet =new HashSet();
     	serverDetailsSet=s.readTextFile(inputFileName,splitBy);
-      	System.out.println("____=++++++++++++++++++++++++++++++++++++++++++");
+      	System.out.println("____=++++++++++++++++++++++++++++++++++++++++++"+serverDetailsSet);
       	
      
       	

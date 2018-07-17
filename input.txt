@@ -1,6 +1,2 @@
-Server1,database,Mysql,1.2.3
-Server1,database,Mysql,1.2.4
-Server1,database,Mysql,1.2.5
-Server1,database,Mysql,1.2.6
-Server1,database,Mysql,1.2.7
-Server1,database,Mysql,1.2.8
+Server1,os,obuntu,1.2.3
+Server1,webServer,Tomcat,1.2.4
