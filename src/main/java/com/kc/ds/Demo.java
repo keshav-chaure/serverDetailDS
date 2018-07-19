@@ -10,6 +10,8 @@ public class Demo {
 
 		demoMyLinkList();	 	 
 	 	countWordOccarance("Nothing is as easy as it looks");
+	 	Boolean b=true;
+	 	 System.out.println("Size of byte: " + (Byte.SIZE/8) + " bytes.");
 
 	}
 
