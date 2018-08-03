@@ -90,7 +90,7 @@ public class PDFReader {
 		  System.out.println("Keywords of the document are :"+ pdd.getKeywords());
 	}
 
-	public void readPDFUsingTableExtractor(String filePath) {
+	public void readPDFByCharLocationAndSize(String filePath) {
 		String string = null;
         try {
             PDFParser pdfParser = new PDFParser(new RandomAccessFile(new File(filePath), "r"));
