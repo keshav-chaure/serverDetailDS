@@ -5,6 +5,54 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+class Employee{
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	String name;
+
+	public Employee(String name) {
+		super();
+		this.name = name;
+	}
+	
+	
+	
+	
+	
+	
+}
 public class Demo {
 	
 public static void printDistinctChar(String input) {
@@ -66,6 +114,29 @@ private static List<String> splitToNChar(String text, int size) {
 	 //	Boolean b=true;
 	 //	 System.out.println("Size of byte: " + (Byte.SIZE/8) + " bytes.");
 
+		HashMap h=new HashMap();
+		Employee emp=new Employee("keshav");
+		h.put(emp,"Ram");
+		System.out.println("hashMap is :"+h);
+		//emp=null;
+		emp=new Employee("ravi");
+		System.out.println("hashMap is :"+h);
+		System.out.println("hashMap is :"+h.get(emp));
+		
+		HashMap h1=new HashMap();
+		Employee emp1=new Employee("shiva");
+		String k="shiv";
+		System.out.println("k : "+k);
+		h1.put(k,emp1);
+		System.out.println("hashMap1 is :"+h1);
+		emp1=null;
+		//k=null;
+		String j=k+"ravi";
+		System.out.println("k :"+k);
+		//emp=new Employee("ravi");
+		System.out.println("hashMap1 is :"+h1);
+		System.out.println("hashMap is :"+h1.get(k));
+		
 	}
 
 	
