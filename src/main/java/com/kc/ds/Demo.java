@@ -55,6 +55,23 @@ class Employee{
 }
 public class Demo {
 	
+	// linearSearch- not sorted element,
+	public static void linearSearch(int[] nos, int search) {
+		int size=nos.length;
+		System.out.println(size);
+		int index=-1;
+		for(int i=0; i< size; i++) {
+			System.out.println(nos[i]);
+			if(search==nos[i]) {
+				index=i;
+			}
+		}
+		System.out.println("no "+search +" is  present at index "+index);
+		
+	}
+	//Binary Search - require sorted array
+	
+	
 public static void printDistinctChar(String input) {
 	Map<Character,Integer> distinctChar=new HashMap();
 	char[] charArray=input.toCharArray();
@@ -136,6 +153,9 @@ private static List<String> splitToNChar(String text, int size) {
 		//emp=new Employee("ravi");
 		System.out.println("hashMap1 is :"+h1);
 		System.out.println("hashMap is :"+h1.get(k));
+		
+		System.out.println("Leaner Search Algo : ");
+		linearSearch(new int[]{1,2,4,3,2,5,7,9},3); 
 		
 	}
 
