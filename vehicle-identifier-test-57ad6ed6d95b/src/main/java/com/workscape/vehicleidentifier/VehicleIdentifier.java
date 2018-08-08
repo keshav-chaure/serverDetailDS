@@ -8,12 +8,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -27,16 +31,18 @@ import org.xml.sax.SAXException;
  * 
  */
 public class VehicleIdentifier {
+	Set<Vehicle> vehicles=new HashSet();
+	Vehicle v=new Vehicle();
+	
+	
+	 
 	public static void main(String args[]) throws IOException
 	 {
-	
 		
 	  VehicleIdentifier vi=new VehicleIdentifier();
 	  System.out.println("Reading file from resources folder");
-	  System.out.println("-----------------------------");
-	 
-	  vi.readFile("vehicles.xml");
-	  
+	  System.out.println("-----------------------------");	 
+	  vi.readFile("vehicles.xml");	  
 	  System.out.println("-----------------------------");
 	 }
 	
@@ -44,81 +50,63 @@ public class VehicleIdentifier {
 
 	public  void readFile(String fileName) throws IOException
 	 {
-	  FileInputStream inputStream=null;
-	  
+	  FileInputStream inputStream=null;	  
 	  try {
-	   // Getting ClassLoader obj
-	   ClassLoader classLoader = this.getClass().getClassLoader();
-	   // Getting resource(File) from class loader
-	   File configFile=new File(classLoader.getResource(fileName).getFile());
-	  
+	   
+	   ClassLoader classLoader = this.getClass().getClassLoader();	   
+	   File configFile=new File(classLoader.getResource(fileName).getFile());	  
 	   DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-		Document doc = dBuilder.parse(configFile);
-				
-		//optional, but recommended
-		//read this - http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-		doc.getDocumentElement().normalize();
-
-		System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+	   DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+	   Document doc = dBuilder.parse(configFile);		 
+		doc.getDocumentElement().normalize();	 
 		NodeList root=doc.getElementsByTagName("vehicle");
-		System.out.println(root.getLength());		
-		Node vehicle=getNode(doc.getChildNodes(),"vehicle");
-		//System.out.println(vehicle);
-	/*	 
-				
-		System.out.println("----------------------------");
-
-		for (int temp = 0; temp < nList.getLength(); temp++) {
-
-			Node nNode = nList.item(temp);
-					
-			System.out.println("\nCurrent Element :" + nNode.getNodeName());
-					
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
-				Element eElement = (Element) nNode;
-
-				System.out.println("vehicle id : " + eElement.getElementsByTagName("id").item(0).getTextContent());
- 				System.out.println("frame : " + eElement.getElementsByTagName("firstname").item(0).getTextContent());
-//				System.out.println("Last Name : " + eElement.getElementsByTagName("lastname").item(0).getTextContent());
-//				System.out.println("Nick Name : " + eElement.getElementsByTagName("nickname").item(0).getTextContent());
-//				System.out.println("Salary : " + eElement.getElementsByTagName("salary").item(0).getTextContent());
-
-			}
-			
-			
-		}
-		*/
-		 
-	 
+		 for (int i=0;i< root.getLength() ;i++){
+			 Node n=root.item(i);			 
+			 getNodeValue(n);	 
+		 }
 	 
 	  }  catch (Exception e) {
 			e.printStackTrace();
 	    }
 	  finally {
-	  // inputStream.close();
-	  }
-	 
-	  
-	 }
-
-
-
-	private Node getNode(NodeList nodes, String tagName) {
-		//System.out.println(nodes);
-		//System.out.println(tagName);
-		 for ( int x = 0; x < nodes.getLength(); x++ ) {
-			 System.out.println(x);
-			 
-		        Node node = nodes.item(x);
-		        System.out.println(node);
-//		        if (node.getNodeName().equalsIgnoreCase(tagName)) {
-//		            return node;
-//		        }
-		    }		 
-		    return null;		 
+	   inputStream.close();
+	  }	  
 	}
+
+	public  void getNodeValue(Node node) {
+		String value=null;
+		if(node.hasChildNodes() && node.getChildNodes().getLength() >0) {
+			NodeList tempList=node.getChildNodes();
+			for(int i=0;i<tempList.getLength(); i++) {
+				Node tempNode=tempList.item(i);
+				getNodeValue(tempNode);
+			}
+		}else{
+			
+			
+			if(node.getNodeType()==3 ) {			
+				if(node.getParentNode().getNodeName().equalsIgnoreCase("id")) {
+					v.setVehicleID( node.getNodeValue() );
+				}else if(node.getParentNode().getNodeName().equalsIgnoreCase("material")) {
+					
+				}else if(node.getParentNode().getNodeName().equalsIgnoreCase("position")) {
+					
+				}  
+			System.out.println( "parnet Name :"+ node.getParentNode().getNodeName().toString() + "    node name : "+ node.getNodeValue() +", value :" +(node.getTextContent()));				
+			}else if(node.getNodeType()==1) {
+				if(node.getParentNode().getNodeName().equalsIgnoreCase("powertrain")) {
+					
+				  } 
+			 	 
+			}
+		 
+		}
+		 
+	}
+
+	 
+	
+	 
 	
 	 
 }
